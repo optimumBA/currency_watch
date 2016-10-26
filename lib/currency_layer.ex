@@ -42,12 +42,13 @@ defmodule CurrencyLayer do
 
   @http Application.get_env(:currency_watch, :currency_layer)[:http_client] || :httpc
   defp fetch_json(endpoint, params \\ []) do
-    endpoint
+    url = endpoint
     |> create_url()
     |> add_access_key()
     |> add_params(params)
+    |> String.to_char_list()
 
-    {:ok, {_, _, body}} = @http.request(endpoint)
+    {:ok, {_, _, body}} = @http.request(url)
     body
   end
 
