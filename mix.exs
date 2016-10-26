@@ -38,7 +38,8 @@ defmodule CurrencyWatch.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:junit_formatter, "~> 1.1", only: :test}]
+     {:junit_formatter, "~> 1.1", only: :test},
+     {:json, "~> 1.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
