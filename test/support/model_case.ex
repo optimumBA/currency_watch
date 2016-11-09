@@ -21,6 +21,7 @@ defmodule CurrencyWatch.ModelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+      import CurrencyWatch.TestHelpers
       import CurrencyWatch.ModelCase
     end
   end
