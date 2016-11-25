@@ -5,6 +5,7 @@ defmodule CurrencyWatch.Currency do
     field :code, :string
     field :name, :string
 
+    has_many :exchange_rates, CurrencyWatch.ExchangeRate
     timestamps()
   end
 
