@@ -11,6 +11,7 @@ defmodule CurrencyLayer.Request do
     |> create_url()
     |> add_access_key()
     |> add_params(params)
+    |> to_charlist()
   end
 
   @protocol Application.get_env(:currency_watch, :currency_layer)[:protocol] || "http"
