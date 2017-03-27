@@ -5,16 +5,7 @@ defmodule CurrencyLayer do
     json = Request.fetch("live")
     {:ok, map} = JSON.decode(json)
     %{"success" => true, "timestamp" => timestamp, "quotes" => quotes} = map
-    rates = Enum.into(quotes, %{}, fn({key, value}) ->
-      key = String.slice(key, 3..5)
-
-      value = cond do
-        is_float(value) -> Float.round(value, 6)
-        true -> value
-      end
-
-      {key, value}
-    end)
+    rates = CurrencyLayer.Rate.extract_rates(quotes)
     {:ok, timestamp, rates}
   end
 
