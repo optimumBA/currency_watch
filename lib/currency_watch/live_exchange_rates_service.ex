@@ -3,24 +3,20 @@ defmodule CurrencyWatch.LiveExchangeRatesService do
 
   alias CurrencyWatch.{Repo, Currency, ExchangeRate}
 
-  def fetch do
-    case CurrencyLayer.fetch_live_rates do
-      {:ok, _, rates} ->
-        save_rates(rates)
-      true ->
-        Logger.error "Error while fetching rates"
-    end
+  def fetch(rates_api \\ CurrencyLayer, currencies_api \\ CurrencyLayer) do
+    rates = rates_api.fetch_live_rates()
+    save_rates(rates, %{}, currencies_api)
   end
 
-  defp save_rates([], _) do end
-  defp save_rates([head|tail], currencies \\ %{}) do
+  defp save_rates([], _, _) do end
+  defp save_rates([head|tail], currencies, currencies_api) do
     [currency_code, rate_value] = head
 
     if currency = Repo.get_by(Currency, code: currency_code) do
       save_rate(currency, rate_value)
     else
       if Enum.empty?(currencies) do
-        {:ok, currencies} = CurrencyLayer.fetch_currencies()
+        currencies = currencies_api.fetch_currencies
       end
 
       changeset = Currency.changeset(%Currency{}, %{
@@ -36,7 +32,7 @@ defmodule CurrencyWatch.LiveExchangeRatesService do
       end
     end
 
-    save_rates(tail, currencies)
+    save_rates(tail, currencies, currencies_api)
   end
 
   defp save_rate(currency, rate_value) do
