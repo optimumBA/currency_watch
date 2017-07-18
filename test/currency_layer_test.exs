@@ -2,8 +2,9 @@ defmodule CurrencyLayerTest do
   use ExUnit.Case, async: true
 
   test "fetches live rates" do
-    assert {:ok, _, rates} = CurrencyLayer.fetch_live_rates()
-    assert %{"EUR" => 0.917397, "USD" => 1} = rates
+    rates = CurrencyLayer.fetch_live_rates()
+    assert Enum.member?(rates, ["EUR", 0.917397])
+    assert Enum.member?(rates, ["USD", 1])
   end
 
   test "fetches historical rates" do
@@ -12,7 +13,7 @@ defmodule CurrencyLayerTest do
   end
 
   test "fetches currencies" do
-    assert {:ok, currencies} = CurrencyLayer.fetch_currencies()
+    currencies = CurrencyLayer.fetch_currencies()
     assert %{"EUR" => "Euro", "USD" => "United States Dollar"} = currencies
   end
 end
