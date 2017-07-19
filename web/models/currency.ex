@@ -6,6 +6,7 @@ defmodule CurrencyWatch.Currency do
   schema "currencies" do
     field :code, :string
     field :name, :string
+    field :flag, :string
 
     has_many :exchange_rates, CurrencyWatch.ExchangeRate
     timestamps()
@@ -16,11 +17,13 @@ defmodule CurrencyWatch.Currency do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, ~w(code name))
+    |> cast(params, ~w(code name flag))
     |> validate_required([:code, :name])
     |> validate_length(:code, is: 3)
     |> validate_format(:code, ~r/^[A-Z]+$/)
     |> unique_constraint(:code)
+    |> validate_length(:flag, is: 2)
+    |> validate_format(:flag, ~r/^[a-z]+$/)
   end
 
   def exists(code) do
