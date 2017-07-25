@@ -14,11 +14,8 @@ defmodule CurrencyWatch.Router do
   end
 
   scope "/", CurrencyWatch do
-    pipe_through :browser # Use the default browser stack
-  end
+    pipe_through :api
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CurrencyWatch do
-  #   pipe_through :api
-  # end
+    resources "/currencies", CurrencyController, only: [:index]
+  end
 end
