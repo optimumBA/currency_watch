@@ -18,57 +18,41 @@ defmodule CurrencyWatch.CurrencyTest do
 
   test "changeset does not allow numbers in currency code" do
     attrs = Map.put(@valid_attrs, :code, "3UR")
-    changeset = Currency.changeset(%Currency{}, attrs)
-    refute changeset.valid?
-    assert {:code, {"has invalid format", []}} in changeset.errors
+    assert {:code, "has invalid format"} in errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow symbols in currency code" do
     attrs = Map.put(@valid_attrs, :code, "U$D")
-    changeset = Currency.changeset(%Currency{}, attrs)
-    refute changeset.valid?
-    assert {:code, {"has invalid format", []}} in changeset.errors
+    assert {:code, "has invalid format"} in errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow short currency code" do
     attrs = Map.put(@valid_attrs, :code, "US")
-    changeset = Currency.changeset(%Currency{}, attrs)
-    refute changeset.valid?
-    assert {:code, {"should be %{count} character(s)", [count: 3]}} in changeset.errors
+    assert {:code, "should be 3 character(s)"} in errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow long currency code" do
     attrs = Map.put(@valid_attrs, :code, "USSD")
-    changeset = Currency.changeset(%Currency{}, attrs)
-    refute changeset.valid?
-    assert {:code, {"should be %{count} character(s)", [count: 3]}} in changeset.errors
+    assert {:code, "should be 3 character(s)"} in errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow numbers in currency flag" do
     attrs = Map.put(@valid_attrs, :flag, "3u")
-    changeset = Currency.changeset(%Currency{}, attrs)
-    refute changeset.valid?
-    assert {:flag, {"has invalid format", []}} in changeset.errors
+    assert {:flag, "has invalid format"} in errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow symbols in currency flag" do
     attrs = Map.put(@valid_attrs, :flag, "u$")
-    changeset = Currency.changeset(%Currency{}, attrs)
-    refute changeset.valid?
-    assert {:flag, {"has invalid format", []}} in changeset.errors
+    assert {:flag, "has invalid format"} in errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow short currency flag" do
     attrs = Map.put(@valid_attrs, :flag, "B")
-    changeset = Currency.changeset(%Currency{}, attrs)
-    refute changeset.valid?
-    assert {:flag, {"should be %{count} character(s)", [count: 2]}} in changeset.errors
+    assert {:flag, "should be 2 character(s)"} in errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow long currency flag" do
     attrs = Map.put(@valid_attrs, :flag, "bam")
-    changeset = Currency.changeset(%Currency{}, attrs)
-    refute changeset.valid?
-    assert {:flag, {"should be %{count} character(s)", [count: 2]}} in changeset.errors
+    assert {:flag, "should be 2 character(s)"} in errors_on(%Currency{}, attrs)
   end
 end
