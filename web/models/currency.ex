@@ -1,14 +1,14 @@
 defmodule CurrencyWatch.Currency do
   use CurrencyWatch.Web, :model
 
-  alias CurrencyWatch.{Repo, Currency}
+  alias CurrencyWatch.{Repo, Currency, ExchangeRate}
 
   schema "currencies" do
     field :code, :string
     field :name, :string
     field :flag, :string
 
-    has_many :exchange_rates, CurrencyWatch.ExchangeRate
+    has_many :exchange_rates, ExchangeRate
     timestamps()
   end
 
@@ -33,5 +33,26 @@ defmodule CurrencyWatch.Currency do
       [1] -> true
       [] -> false
     end
+  end
+
+  def with_current_rate(query) do
+    subquery = from e in ExchangeRate,
+      select: %{
+        id: max(e.id),
+        currency_id: e.currency_id,
+        value: e.value
+      },
+      where: fragment("DATE(?)", e.inserted_at) == ^Ecto.Date.utc,
+      group_by: [e.currency_id, e.value]
+
+    from c in query,
+      left_join: er in subquery(subquery), on: [currency_id: c.id],
+      select: %{
+        id: c.id,
+        code: c.code,
+        name: c.name,
+        current_rate: er.value,
+        flag: c.flag,
+      }
   end
 end

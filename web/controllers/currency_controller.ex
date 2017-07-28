@@ -4,7 +4,10 @@ defmodule CurrencyWatch.CurrencyController do
   alias CurrencyWatch.Currency
 
   def index(conn, _params) do
-    currencies = Repo.all(Currency)
+    currencies = Currency
+    |> Currency.with_current_rate
+    |> Repo.all
+
     render(conn, "index.json", currencies: currencies)
   end
 end

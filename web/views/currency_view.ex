@@ -11,6 +11,7 @@ defmodule CurrencyWatch.CurrencyView do
       id: currency.id,
       code: currency.code,
       name: currency.name,
+      current_rate: currency.current_rate,
       flag_url: flag_url(currency),
     }
   end

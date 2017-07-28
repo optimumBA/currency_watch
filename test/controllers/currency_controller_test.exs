@@ -9,17 +9,21 @@ defmodule CurrencyWatch.CurrencyControllerTest do
 
   test "lists all currencies on index", %{conn: conn} do
     currency = Repo.insert! %Currency{
-      code: "USD",
-      name: "United States Dollar",
-      flag: "us"
+      code: "EUR",
+      name: "Euro",
+      flag: "eu"
     }
+    currency
+    |> Ecto.build_assoc(:exchange_rates, value: 0.858022)
+    |> Repo.insert
 
     conn = get conn, currency_path(conn, :index)
     assert json_response(conn, 200) == [%{
       "id" => currency.id,
-      "code" => "USD",
-      "name" => "United States Dollar",
-      "flag_url" => "http://localhost:4001/images/flags/us.png",
+      "code" => "EUR",
+      "name" => "Euro",
+      "current_rate" => "0.858022",
+      "flag_url" => "http://localhost:4001/images/flags/eu.png",
     }]
   end
 end
