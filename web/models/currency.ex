@@ -35,8 +35,8 @@ defmodule CurrencyWatch.Currency do
     end
   end
 
-  def with_current_rate(query) do
-    subquery = from e in ExchangeRate,
+  def with_current_and_last_rate(query) do
+    subquery_current = from e in ExchangeRate,
       select: %{
         id: max(e.id),
         currency_id: e.currency_id,
@@ -45,13 +45,24 @@ defmodule CurrencyWatch.Currency do
       where: fragment("DATE(?)", e.inserted_at) == ^Ecto.Date.utc,
       group_by: [e.currency_id, e.value]
 
+    subquery_last = from e in ExchangeRate,
+      select: %{
+        id: max(e.id),
+        currency_id: e.currency_id,
+        value: e.value
+      },
+      where: fragment("DATE(?)", e.inserted_at) == type(^CurrencyWatch.day_before(Ecto.DateTime.utc), Ecto.Date),
+      group_by: [e.currency_id, e.value]
+
     from c in query,
-      left_join: er in subquery(subquery), on: [currency_id: c.id],
+      left_join: erc in subquery(subquery_current), on: [currency_id: c.id],
+      left_join: erl in subquery(subquery_last), on: [currency_id: c.id],
       select: %{
         id: c.id,
         code: c.code,
         name: c.name,
-        current_rate: er.value,
+        current_rate: erc.value,
+        last_rate: erl.value,
         flag: c.flag,
       }
   end

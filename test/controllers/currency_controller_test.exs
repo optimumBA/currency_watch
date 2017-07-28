@@ -14,6 +14,9 @@ defmodule CurrencyWatch.CurrencyControllerTest do
       flag: "eu"
     }
     currency
+    |> Ecto.build_assoc(:exchange_rates, value: 0.858946, inserted_at: CurrencyWatch.day_before(Ecto.DateTime.utc))
+    |> Repo.insert
+    currency
     |> Ecto.build_assoc(:exchange_rates, value: 0.858022)
     |> Repo.insert
 
@@ -23,6 +26,7 @@ defmodule CurrencyWatch.CurrencyControllerTest do
       "code" => "EUR",
       "name" => "Euro",
       "current_rate" => "0.858022",
+      "last_rate" => "0.858946",
       "flag_url" => "http://localhost:4001/images/flags/eu.png",
     }]
   end

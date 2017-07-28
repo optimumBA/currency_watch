@@ -28,4 +28,13 @@ defmodule CurrencyWatch do
     CurrencyWatch.Endpoint.config_change(changed, removed)
     :ok
   end
+
+  def day_before(datetime) do
+    datetime
+    |> Ecto.DateTime.to_erl
+    |> :calendar.datetime_to_gregorian_seconds
+    |> Kernel.-(24 * 60 * 60)
+    |> :calendar.gregorian_seconds_to_datetime
+    |> Ecto.DateTime.from_erl
+  end
 end
