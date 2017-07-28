@@ -18,6 +18,8 @@ defmodule CurrencyWatch.CurrencyView do
   end
 
   def flag_url(currency) do
-    static_url(CurrencyWatch.Endpoint, "/images/flags/#{currency.flag}.png")
+    if currency.flag do
+      static_url(CurrencyWatch.Endpoint, "/images/flags/#{currency.flag}.png")
+    end
   end
 end
