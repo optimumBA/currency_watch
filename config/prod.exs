@@ -64,6 +64,8 @@ config :currency_watch, CurrencyWatch.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
+config :currency_watch, :currency_layer, access_key: System.get_env("CURRENCY_LAYER_KEY")
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 # import_config "prod.secret.exs"
