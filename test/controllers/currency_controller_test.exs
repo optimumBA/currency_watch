@@ -17,6 +17,9 @@ defmodule CurrencyWatch.CurrencyControllerTest do
     |> Ecto.build_assoc(:exchange_rates, value: 0.858946, inserted_at: CurrencyWatch.Date.day_before(Ecto.DateTime.utc))
     |> Repo.insert
     currency
+    |> Ecto.build_assoc(:exchange_rates, value: 0.858023)
+    |> Repo.insert
+    currency
     |> Ecto.build_assoc(:exchange_rates, value: 0.858022)
     |> Repo.insert
 
