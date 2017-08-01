@@ -22,11 +22,12 @@ defmodule CurrencyWatch.ExchangeRate do
   def for_date(date) do
     from e in ExchangeRate,
       select: %{
-        id: max(e.id),
+        id: e.id,
         currency_id: e.currency_id,
         value: e.value
       },
+      distinct: e.currency_id,
       where: fragment("DATE(?)", e.inserted_at) == type(^date, Ecto.Date),
-      group_by: [e.currency_id, e.value]
+      order_by: [desc: e.inserted_at]
   end
 end
