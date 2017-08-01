@@ -30,4 +30,12 @@ defmodule CurrencyWatch.ExchangeRate do
       where: fragment("DATE(?)", e.inserted_at) == type(^date, Ecto.Date),
       order_by: [desc: e.inserted_at]
   end
+
+  def old(query) do
+    timestamp = DateTime.to_unix(DateTime.utc_now)
+    {:ok, datetime} = DateTime.from_unix(timestamp - 2 * 24 * 60 * 60)
+
+    from e in query,
+      where: e.inserted_at < ^datetime
+  end
 end
