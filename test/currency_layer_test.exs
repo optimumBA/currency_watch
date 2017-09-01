@@ -3,8 +3,8 @@ defmodule CurrencyLayerTest do
 
   test "fetches live rates" do
     rates = CurrencyLayer.fetch_live_rates()
-    assert Enum.member?(rates, ["EUR", 0.917397])
-    assert Enum.member?(rates, ["USD", 1])
+    assert Enum.member?(rates, {"EUR", 0.917397})
+    assert Enum.member?(rates, {"USD", 1})
   end
 
   test "fetches historical rates" do

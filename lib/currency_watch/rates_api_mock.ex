@@ -5,7 +5,7 @@ defmodule CurrencyWatch.RatesAPIMock do
     send self(), :rates_api
 
     [
-      ["BAM", 1.727203],
+      {"BAM", 1.727203},
     ]
   end
 end
