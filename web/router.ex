@@ -17,5 +17,8 @@ defmodule CurrencyWatch.Router do
     pipe_through :api
 
     resources "/currencies", CurrencyController, only: [:index]
+
+    get "/webhook", WebhookController, :verify
+    post "/webhook", WebhookController, :handle
   end
 end
