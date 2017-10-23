@@ -27,9 +27,7 @@ defmodule CurrencyWatch.FacebookMessengerHandler do
       recipient: %{
         id: sender_id,
       },
-      message: %{
-        text: message["text"],
-      }
+      sender_action: "mark_seen",
     })
 
     HTTPoison.post(endpoint, body, [{"Content-Type", "application/json"}])
