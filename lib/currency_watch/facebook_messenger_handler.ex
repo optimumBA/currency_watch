@@ -19,7 +19,21 @@ defmodule CurrencyWatch.FacebookMessengerHandler do
     {:ok, []}
   end
 
+  @page_access_token Application.get_env(:currency_watch, :facebook)[:access_token]
   def handle_cast({:handle_message, sender_id, message}, _state) do
+    endpoint = "https://graph.facebook.com/v2.6/me/messages?access_token=" <> @page_access_token
+
+    {:ok, body} = Poison.encode(%{
+      recipient: %{
+        id: sender_id,
+      },
+      message: %{
+        text: message["text"],
+      }
+    })
+
+    HTTPoison.post(endpoint, body, [{"Content-Type", "application/json"}])
+
     {:noreply, nil}
   end
 end

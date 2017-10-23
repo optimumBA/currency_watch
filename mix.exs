@@ -19,7 +19,7 @@ defmodule CurrencyWatch.Mixfile do
   def application do
     [mod: {CurrencyWatch, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +39,8 @@ defmodule CurrencyWatch.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:junit_formatter, "~> 1.1", only: :test},
-     {:json, "~> 1.0"}]
+     {:json, "~> 1.0"},
+     {:httpoison, "~> 0.13"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
