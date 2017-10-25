@@ -1,7 +1,7 @@
 defmodule CurrencyWatch.WebhookController do
   use CurrencyWatch.Web, :controller
 
-  alias CurrencyWatch.FacebookMessengerHandler
+  alias Facebook.Worker
 
   def handle(conn, %{"object" => "page", "entry" => entries}) do
     Enum.map(entries, &handle_entry/1)
@@ -14,7 +14,7 @@ defmodule CurrencyWatch.WebhookController do
   def verify(conn, _params), do: send_resp(conn, 403, "")
 
   defp handle_entry(%{"messaging" => [%{"sender" => %{"id" => sender_id}, "message" => message}]}) do
-    FacebookMessengerHandler.handle_message(sender_id, message)
+    Worker.handle_message(sender_id, message)
   end
   defp handle_entry(%{"messaging" => [%{"postback" => _postback}]}) do
     # handle postback

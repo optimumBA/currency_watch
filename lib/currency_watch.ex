@@ -15,7 +15,7 @@ defmodule CurrencyWatch do
       # Start your own worker by calling: CurrencyWatch.Worker.start_link(arg1, arg2, arg3)
       # worker(CurrencyWatch.Worker, [arg1, arg2, arg3]),
       worker(CurrencyWatch.Client.InMemoryClient, []),
-      worker(CurrencyWatch.FacebookMessengerHandler, [])
+      worker(Facebook.Worker, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
