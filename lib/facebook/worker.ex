@@ -20,7 +20,7 @@ defmodule Facebook.Worker do
   end
 
   def handle_cast({:handle_message, sender_id, _message}, _state) do
-    Facebook.MessageSender.mark_as_seen(sender_id)
+    Facebook.Responder.mark_as_seen(sender_id)
 
     {:noreply, nil}
   end

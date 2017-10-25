@@ -1,4 +1,4 @@
-defmodule Facebook.MessageSenderTest do
+defmodule Facebook.ResponderTest do
   use ExUnit.Case, async: true
 
   alias CurrencyWatch.Client.InMemoryClient
@@ -10,7 +10,7 @@ defmodule Facebook.MessageSenderTest do
     }}
     InMemoryClient.push(response)
 
-    assert Facebook.MessageSender.mark_as_seen(1340752069386539) == response
+    assert Facebook.Responder.mark_as_seen(1340752069386539) == response
 
     assert %Request{
       method: :post,
