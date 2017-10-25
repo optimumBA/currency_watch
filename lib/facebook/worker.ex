@@ -1,6 +1,8 @@
 defmodule Facebook.Worker do
   use GenServer
 
+  alias Facebook.{MessageProcessor, Responder}
+
   def start_link() do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
@@ -19,8 +21,11 @@ defmodule Facebook.Worker do
     {:ok, []}
   end
 
-  def handle_cast({:handle_message, sender_id, _message}, _state) do
-    Facebook.Responder.mark_as_seen(sender_id)
+  def handle_cast({:handle_message, sender_id, %{"text" => text}}, _state) do
+    Responder.mark_as_seen(sender_id)
+    Responder.show_typing_indicator(sender_id)
+    response = MessageProcessor.create_response(text)
+    Responder.send_message(sender_id, response)
 
     {:noreply, nil}
   end
