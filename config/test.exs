@@ -19,3 +19,5 @@ config :currency_watch, CurrencyWatch.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :currency_watch, :currency_layer, access_key: "1234", http_client: CurrencyLayer.Test.HTTPClient
+
+config :currency_watch, :client, CurrencyWatch.Client.InMemoryClient
