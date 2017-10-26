@@ -35,7 +35,7 @@ defmodule CurrencyWatch.Currency do
     end
   end
 
-  def with_current_and_last_rate(query) do
+  def with_current_and_last_rate(query \\ __MODULE__) do
     from c in query,
       left_join: erc in subquery(ExchangeRate.for_date(Ecto.Date.utc)), on: [currency_id: c.id],
       left_join: erl in subquery(ExchangeRate.for_date(CurrencyWatch.Date.day_before(Ecto.DateTime.utc))), on: [currency_id: c.id],
