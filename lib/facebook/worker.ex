@@ -1,6 +1,7 @@
 defmodule Facebook.Worker do
   use GenServer
 
+  alias CurrencyWatch.{Identity, Repo}
   alias Facebook.{MessageProcessor, Responder}
 
   def start_link() do
@@ -24,6 +25,10 @@ defmodule Facebook.Worker do
   def handle_cast({:handle_message, sender_id, %{"text" => text}}, _state) do
     Responder.mark_as_seen(sender_id)
     Responder.show_typing_indicator(sender_id)
+    unless Identity.exists(sender_id) do
+      changeset = Identity.changeset(%Identity{token: sender_id})
+      Repo.insert(changeset)
+    end
     response = MessageProcessor.create_response(text)
     Responder.send_message(sender_id, response)
 
