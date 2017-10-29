@@ -1,7 +1,6 @@
 defmodule CurrencyWatch.LiveExchangeRatesServiceTest do
   use CurrencyWatch.ModelCase
 
-  alias CurrencyWatch.Currency
   alias CurrencyWatch.CurrenciesAPIMock
   alias CurrencyWatch.LiveExchangeRatesService
   alias CurrencyWatch.RatesAPIMock
@@ -15,11 +14,10 @@ defmodule CurrencyWatch.LiveExchangeRatesServiceTest do
     end
 
     test "doesn't call currency API when no new currencies" do
-      changeset = Currency.changeset(%Currency{}, %{
+      insert_currency(%{
         code: "BAM",
         name: "Bosnia-Herzegovina Convertible Mark"
       })
-      Repo.insert(changeset)
 
       LiveExchangeRatesService.fetch(RatesAPIMock, CurrenciesAPIMock)
 

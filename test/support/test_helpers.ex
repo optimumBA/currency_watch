@@ -13,6 +13,12 @@ defmodule CurrencyWatch.TestHelpers do
     |> Repo.insert!()
   end
 
+  def insert_exchange_rate(currency, attrs) do
+    currency
+    |> Ecto.build_assoc(:exchange_rates, attrs)
+    |> Repo.insert!()
+  end
+
   defp random_currency_code(code \\ "")
   defp random_currency_code(code) when byte_size(code) == 3, do: code
   defp random_currency_code(code), do: random_currency_code(code <> random_uppercase_letter())

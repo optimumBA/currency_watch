@@ -7,17 +7,13 @@ defmodule Mix.Tasks.CurrencyWatch.Rates.CleanupTest do
   describe "run" do
     test "doesn't call currency API when no new currencies" do
       currency = insert_currency()
-      timestamp = DateTime.to_unix(DateTime.utc_now)
 
+      timestamp = DateTime.to_unix(DateTime.utc_now)
       {:ok, datetime} = DateTime.from_unix(timestamp - 2 * 24 * 60 * 60 - 1)
-      currency
-      |> Ecto.build_assoc(:exchange_rates, value: 0.858946, inserted_at: datetime)
-      |> Repo.insert
+      insert_exchange_rate(currency, %{value: 0.858946, inserted_at: datetime})
 
       {:ok, datetime} = DateTime.from_unix(timestamp - 2 * 24 * 60 * 60 + 1)
-      {:ok, new_exchange_rate} = currency
-      |> Ecto.build_assoc(:exchange_rates, value: 0.858946, inserted_at: datetime)
-      |> Repo.insert
+      new_exchange_rate = insert_exchange_rate(currency, %{value: 0.858946, inserted_at: datetime})
 
       Mix.Tasks.CurrencyWatch.Rates.Cleanup.run("")
 

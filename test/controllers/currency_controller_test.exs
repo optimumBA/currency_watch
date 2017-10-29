@@ -8,20 +8,14 @@ defmodule CurrencyWatch.CurrencyControllerTest do
   end
 
   test "lists all currencies on index", %{conn: conn} do
-    currency = Repo.insert! %Currency{
+    currency = insert_currency(%{
       code: "EUR",
       name: "Euro",
       flag: "eu"
-    }
-    currency
-    |> Ecto.build_assoc(:exchange_rates, value: 0.858946, inserted_at: CurrencyWatch.Date.day_before(Ecto.DateTime.utc))
-    |> Repo.insert
-    currency
-    |> Ecto.build_assoc(:exchange_rates, value: 0.858023)
-    |> Repo.insert
-    currency
-    |> Ecto.build_assoc(:exchange_rates, value: 0.858022)
-    |> Repo.insert
+    })
+    insert_exchange_rate(currency, %{value: 0.858946, inserted_at: CurrencyWatch.Date.day_before(Ecto.DateTime.utc)})
+    insert_exchange_rate(currency, %{value: 0.858023})
+    insert_exchange_rate(currency, %{value: 0.858022})
 
     conn = get conn, currency_path(conn, :index)
     assert json_response(conn, 200) == [%{

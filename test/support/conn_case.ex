@@ -25,6 +25,7 @@ defmodule CurrencyWatch.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
+      import CurrencyWatch.TestHelpers
       import CurrencyWatch.Router.Helpers
 
       # The default endpoint for testing
