@@ -25,11 +25,11 @@ defmodule Facebook.Worker do
   def handle_cast({:handle_message, sender_id, %{"text" => text}}, _state) do
     Responder.mark_as_seen(sender_id)
     Responder.show_typing_indicator(sender_id)
-    unless Identity.exists(sender_id) do
+    unless identity = Repo.get_by(Identity, token: sender_id) do
       changeset = Identity.changeset(%Identity{token: sender_id})
-      Repo.insert(changeset)
+      {:ok, identity} = Repo.insert(changeset)
     end
-    response = MessageProcessor.create_response(text)
+    response = MessageProcessor.create_response(identity, text)
     Responder.send_message(sender_id, response)
 
     {:noreply, nil}
