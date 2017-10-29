@@ -10,7 +10,7 @@ defmodule CurrencyWatch.LiveExchangeRatesService do
 
   defp save_rates([], _, _) do end
   defp save_rates([head|tail], currencies, currencies_api) do
-    [currency_code, rate_value] = head
+    {currency_code, rate_value} = head
 
     if currency = Repo.get_by(Currency, code: currency_code) do
       save_rate(currency, rate_value)
