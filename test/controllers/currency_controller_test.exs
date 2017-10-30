@@ -1,8 +1,6 @@
 defmodule CurrencyWatch.CurrencyControllerTest do
   use CurrencyWatch.ConnCase
 
-  alias CurrencyWatch.Currency
-
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
@@ -13,7 +11,7 @@ defmodule CurrencyWatch.CurrencyControllerTest do
       name: "Euro",
       flag: "eu"
     })
-    insert_exchange_rate(currency, %{value: 0.858946, inserted_at: CurrencyWatch.Date.day_before(Ecto.DateTime.utc)})
+    insert_exchange_rate(currency, %{value: 0.858946})
     insert_exchange_rate(currency, %{value: 0.858023})
     insert_exchange_rate(currency, %{value: 0.858022})
 
@@ -23,7 +21,7 @@ defmodule CurrencyWatch.CurrencyControllerTest do
       "code" => "EUR",
       "name" => "Euro",
       "current_rate" => "0.858022",
-      "last_rate" => "0.858946",
+      "last_rate" => "0.858023",
       "flag_url" => "http://localhost:4001/images/flags/eu.png",
     }]
   end

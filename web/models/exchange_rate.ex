@@ -1,8 +1,6 @@
 defmodule CurrencyWatch.ExchangeRate do
   use CurrencyWatch.Web, :model
 
-  alias CurrencyWatch.ExchangeRate
-
   schema "exchange_rates" do
     field :value, :decimal
     belongs_to :currency, CurrencyWatch.Currency
@@ -19,15 +17,52 @@ defmodule CurrencyWatch.ExchangeRate do
     |> validate_required([:value])
   end
 
-  def for_date(date) do
-    from e in ExchangeRate,
+  def current do
+    max_subquery = from e in __MODULE__,
+      select: %{
+        currency_id: e.currency_id,
+        max_inserted_at: fragment("max(?)", e.inserted_at)
+      },
+      group_by: e.currency_id
+
+    from e in __MODULE__,
       select: %{
         id: e.id,
         currency_id: e.currency_id,
         value: e.value
       },
       distinct: e.currency_id,
-      where: fragment("DATE(?)", e.inserted_at) == type(^date, Ecto.Date),
+      join: erc in subquery(max_subquery), on: [currency_id: e.currency_id],
+      where: e.inserted_at == erc.max_inserted_at,
+      order_by: [desc: e.inserted_at]
+  end
+
+  def last do
+    max_subquery = from e in __MODULE__,
+      select: %{
+        currency_id: e.currency_id,
+        max_inserted_at: fragment("max(?)", e.inserted_at)
+      },
+      group_by: e.currency_id
+
+    submax_subquery = from e in __MODULE__,
+      select: %{
+        currency_id: e.currency_id,
+        max_inserted_at: fragment("max(?)", e.inserted_at)
+      },
+      join: erm in subquery(max_subquery), on: [currency_id: e.currency_id],
+      where: e.inserted_at < erm.max_inserted_at,
+      group_by: e.currency_id
+
+    from e in __MODULE__,
+      select: %{
+        id: e.id,
+        currency_id: e.currency_id,
+        value: e.value
+      },
+      distinct: e.currency_id,
+      join: erc in subquery(submax_subquery), on: [currency_id: e.currency_id],
+      where: e.inserted_at == erc.max_inserted_at,
       order_by: [desc: e.inserted_at]
   end
 
