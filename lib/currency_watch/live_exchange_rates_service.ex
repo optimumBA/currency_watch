@@ -1,5 +1,6 @@
 defmodule CurrencyWatch.LiveExchangeRatesService do
   require Logger
+  require IEx
 
   alias CurrencyWatch.{Repo, Currency, ExchangeRate}
 
@@ -15,8 +16,10 @@ defmodule CurrencyWatch.LiveExchangeRatesService do
     if currency = Repo.get_by(Currency, code: currency_code) do
       save_rate(currency, rate_value)
     else
-      if Enum.empty?(currencies) do
-        currencies = currencies_api.fetch_currencies
+      currencies = if Enum.empty?(currencies) do
+        currencies_api.fetch_currencies
+      else
+        currencies
       end
 
       changeset = Currency.changeset(%Currency{}, %{

@@ -18,7 +18,7 @@ defmodule CurrencyWatch.TestHelpers do
   defp random_currency_code(code), do: random_currency_code(code <> random_uppercase_letter())
 
   defp random_uppercase_letter do
-    :crypto.rand_uniform(65, 90)
-    |> <<>>
+    random_character = :crypto.rand_uniform(65, 90)
+    <<random_character>>
   end
 end
