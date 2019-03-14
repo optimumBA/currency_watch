@@ -1,4 +1,4 @@
-defmodule CurrencyWatch.ChannelCase do
+defmodule CurrencyWatchWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -27,7 +27,7 @@ defmodule CurrencyWatch.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint CurrencyWatch.Endpoint
+      @endpoint CurrencyWatchWeb.Endpoint
     end
   end
 

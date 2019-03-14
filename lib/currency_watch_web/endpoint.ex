@@ -1,7 +1,7 @@
-defmodule CurrencyWatch.Endpoint do
+defmodule CurrencyWatchWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :currency_watch
 
-  socket "/socket", CurrencyWatch.UserSocket
+  socket "/socket", CurrencyWatchWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,5 +38,5 @@ defmodule CurrencyWatch.Endpoint do
     key: "_currency_watch_key",
     signing_salt: "03ThnbgZ"
 
-  plug CurrencyWatch.Router
+  plug CurrencyWatchWeb.Router
 end

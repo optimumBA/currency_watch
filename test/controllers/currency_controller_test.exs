@@ -1,5 +1,5 @@
 defmodule CurrencyWatch.CurrencyControllerTest do
-  use CurrencyWatch.ConnCase
+  use CurrencyWatchWeb.ConnCase
 
   alias CurrencyWatch.Currency
 

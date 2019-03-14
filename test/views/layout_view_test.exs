@@ -1,3 +1,3 @@
 defmodule CurrencyWatch.LayoutViewTest do
-  use CurrencyWatch.ConnCase, async: true
+  use CurrencyWatchWeb.ConnCase, async: true
 end

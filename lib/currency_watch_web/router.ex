@@ -1,5 +1,5 @@
-defmodule CurrencyWatch.Router do
-  use CurrencyWatch.Web, :router
+defmodule CurrencyWatchWeb.Router do
+  use CurrencyWatchWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule CurrencyWatch.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", CurrencyWatch do
+  scope "/", CurrencyWatchWeb do
     pipe_through :api
 
     resources "/currencies", CurrencyController, only: [:index]

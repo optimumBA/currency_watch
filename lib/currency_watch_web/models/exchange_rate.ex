@@ -1,5 +1,5 @@
 defmodule CurrencyWatch.ExchangeRate do
-  use CurrencyWatch.Web, :model
+  use CurrencyWatchWeb, :model
 
   alias CurrencyWatch.ExchangeRate
 

@@ -1,4 +1,4 @@
-defmodule CurrencyWatch.ConnCase do
+defmodule CurrencyWatchWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -25,10 +25,10 @@ defmodule CurrencyWatch.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import CurrencyWatch.Router.Helpers
+      import CurrencyWatchWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint CurrencyWatch.Endpoint
+      @endpoint CurrencyWatchWeb.Endpoint
     end
   end
 

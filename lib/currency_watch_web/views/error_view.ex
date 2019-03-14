@@ -1,5 +1,5 @@
-defmodule CurrencyWatch.ErrorView do
-  use CurrencyWatch.Web, :view
+defmodule CurrencyWatchWeb.ErrorView do
+  use CurrencyWatchWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"

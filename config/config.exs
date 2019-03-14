@@ -10,10 +10,10 @@ config :currency_watch,
   ecto_repos: [CurrencyWatch.Repo]
 
 # Configures the endpoint
-config :currency_watch, CurrencyWatch.Endpoint,
+config :currency_watch, CurrencyWatchWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "/H1JhnBuuySo1ZtEgBamIu2FZwBgq4mn7bdszq9WhfRBwoi7bIEFSqoktpYpycgd",
-  render_errors: [view: CurrencyWatch.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: CurrencyWatchWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: CurrencyWatch.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

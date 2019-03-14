@@ -1,4 +1,4 @@
-defmodule CurrencyWatch.ErrorHelpers do
+defmodule CurrencyWatchWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule CurrencyWatch.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(CurrencyWatch.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(CurrencyWatchWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(CurrencyWatch.Gettext, "errors", msg, opts)
+      Gettext.dgettext(CurrencyWatchWeb.Gettext, "errors", msg, opts)
     end
   end
 end

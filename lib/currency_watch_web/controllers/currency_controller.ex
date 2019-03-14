@@ -1,5 +1,5 @@
-defmodule CurrencyWatch.CurrencyController do
-  use CurrencyWatch.Web, :controller
+defmodule CurrencyWatchWeb.CurrencyController do
+  use CurrencyWatchWeb, :controller
 
   alias CurrencyWatch.Currency
 

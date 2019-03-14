@@ -1,7 +1,7 @@
 defmodule CurrencyWatch.CurrencyViewTest do
-  use CurrencyWatch.ConnCase, async: true
+  use CurrencyWatchWeb.ConnCase, async: true
 
-  alias CurrencyWatch.CurrencyView
+  alias CurrencyWatchWeb.CurrencyView
   alias CurrencyWatch.Currency
 
   test "returns flag url when set" do
