@@ -1,6 +1,5 @@
 defmodule CurrencyWatch.LiveExchangeRatesService do
   require Logger
-  require IEx
 
   alias CurrencyWatch.{Repo, Currency, ExchangeRate}
 
