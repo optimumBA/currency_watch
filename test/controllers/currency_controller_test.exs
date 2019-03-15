@@ -14,7 +14,7 @@ defmodule CurrencyWatch.CurrencyControllerTest do
       flag: "eu"
     }
     currency
-    |> Ecto.build_assoc(:exchange_rates, value: 0.858946, inserted_at: CurrencyWatch.Date.day_before(Ecto.DateTime.utc))
+    |> Ecto.build_assoc(:exchange_rates, value: 0.858946, inserted_at: CurrencyWatch.Date.day_before(NaiveDateTime.utc_now))
     |> Repo.insert
     currency
     |> Ecto.build_assoc(:exchange_rates, value: 0.858023)
@@ -23,7 +23,7 @@ defmodule CurrencyWatch.CurrencyControllerTest do
     |> Ecto.build_assoc(:exchange_rates, value: 0.858022)
     |> Repo.insert
 
-    conn = get conn, currency_path(conn, :index)
+    conn = get conn, Routes.currency_path(conn, :index)
     assert json_response(conn, 200) == [%{
       "id" => currency.id,
       "code" => "EUR",

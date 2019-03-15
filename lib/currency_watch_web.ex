@@ -34,8 +34,8 @@ defmodule CurrencyWatchWeb do
       import Ecto
       import Ecto.Query
 
-      import CurrencyWatchWeb.Router.Helpers
       import CurrencyWatchWeb.Gettext
+      alias CurrencyWatchWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -50,9 +50,9 @@ defmodule CurrencyWatchWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import CurrencyWatchWeb.Router.Helpers
       import CurrencyWatchWeb.ErrorHelpers
       import CurrencyWatchWeb.Gettext
+      alias CurrencyWatchWeb.Router.Helpers, as: Routes
     end
   end
 

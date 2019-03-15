@@ -1,7 +1,8 @@
 defmodule CurrencyWatchWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :currency_watch
 
-  socket "/socket", CurrencyWatchWeb.UserSocket
+  socket "/socket", CurrencyWatchWeb.UserSocket,
+    websocket: true
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -25,7 +26,7 @@ defmodule CurrencyWatchWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Poison
+    json_decoder: Phoenix.json_library()
 
   plug Plug.MethodOverride
   plug Plug.Head

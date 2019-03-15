@@ -27,8 +27,8 @@ defmodule CurrencyWatch.ExchangeRate do
         value: e.value
       },
       distinct: e.currency_id,
-      where: fragment("DATE(?)", e.inserted_at) == type(^date, Ecto.Date),
-      order_by: [desc: e.inserted_at]
+      where: fragment("DATE(?)", e.inserted_at) == ^NaiveDateTime.to_date(date),
+      order_by: [desc: e.inserted_at, desc: e.id]
   end
 
   def old(query) do

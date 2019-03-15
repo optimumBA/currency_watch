@@ -11,6 +11,6 @@ defmodule CurrencyWatch.CurrencyRepoTest do
     changeset = Currency.changeset(%Currency{}, attrs)
 
     assert {:error, changeset} = Repo.insert(changeset)
-    assert {:code, {"has already been taken", []}} in changeset.errors
+    assert {:code, {"has already been taken", [constraint: :unique, constraint_name: "currencies_code_index"]}} in changeset.errors
   end
 end

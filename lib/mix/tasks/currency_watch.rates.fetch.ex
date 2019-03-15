@@ -1,12 +1,10 @@
 defmodule Mix.Tasks.CurrencyWatch.Rates.Fetch do
   use Mix.Task
 
-  import Mix.Ecto, only: [ensure_started: 2]
-
   @shortdoc "Fetches live rates"
 
   def run(_) do
-    ensure_started(CurrencyWatch.Repo, [])
+    Mix.Task.run "app.start"
 
     CurrencyWatch.LiveExchangeRatesService.fetch
   end
