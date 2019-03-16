@@ -1,5 +1,5 @@
 defmodule CurrencyWatch.LiveExchangeRatesServiceTest do
-  use CurrencyWatch.ModelCase
+  use CurrencyWatch.DataCase
 
   alias CurrencyWatch.Currency
   alias CurrencyWatch.CurrenciesAPIMock

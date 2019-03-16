@@ -6,7 +6,7 @@ defmodule CurrencyWatch.CurrencyViewTest do
 
   test "returns flag url when set" do
     currency = %Currency{flag: "eu"}
-    assert "http://localhost:4001/images/flags/eu.png" == CurrencyView.flag_url(currency)
+    assert "http://localhost:4002/images/flags/eu.png" == CurrencyView.flag_url(currency)
   end
 
   test "returns nil when flag not set" do

@@ -1,5 +1,5 @@
 defmodule Mix.Tasks.CurrencyWatch.Rates.CleanupTest do
-  use CurrencyWatch.ModelCase
+  use CurrencyWatch.DataCase
 
   alias CurrencyWatch.ExchangeRate
   alias CurrencyWatch.Repo

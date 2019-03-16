@@ -1,5 +1,7 @@
 defmodule CurrencyWatch.Currency do
-  use CurrencyWatchWeb, :model
+  use Ecto.Schema
+  import Ecto.Changeset
+  import Ecto.Query, only: [from: 2]
 
   alias CurrencyWatch.{Repo, Currency, ExchangeRate}
 
@@ -27,7 +29,10 @@ defmodule CurrencyWatch.Currency do
   end
 
   def exists(code) do
-    query = from(c in Currency, select: 1, limit: 1, where: c.code == ^code)
+    query = from c in Currency,
+      select: 1,
+      where: c.code == ^code,
+      limit: 1
 
     case Repo.all(query) do
       [1] -> true

@@ -8,7 +8,7 @@ defmodule CurrencyLayer do
   def fetch_live_rates() do
     params = %Params{}
     json = Request.fetch("live", params)
-    {:ok, map} = JSON.decode(json)
+    {:ok, map} = Jason.decode(json)
     %{"success" => true, "timestamp" => _, "quotes" => quotes} = map
     CurrencyLayer.Rate.extract_rates(quotes)
   end
@@ -16,7 +16,7 @@ defmodule CurrencyLayer do
   def fetch_historical_rates(date) do
     params = %Params{date: date}
     json = Request.fetch("historical", params)
-    {:ok, map} = JSON.decode(json)
+    {:ok, map} = Jason.decode(json)
     %{"success" => true, "timestamp" => timestamp, "quotes" => quotes} = map
     rates = Enum.into(quotes, %{}, fn({key, value}) ->
       key = String.slice(key, 3..5)
@@ -34,7 +34,7 @@ defmodule CurrencyLayer do
   def fetch_currencies() do
     params = %Params{}
     json = Request.fetch("list", params)
-    {:ok, map} = JSON.decode(json)
+    {:ok, map} = Jason.decode(json)
     %{"success" => true, "currencies" => currencies} = map
     currencies
   end

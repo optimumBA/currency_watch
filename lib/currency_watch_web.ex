@@ -1,7 +1,7 @@
 defmodule CurrencyWatchWeb do
   @moduledoc """
-  A module that keeps using definitions for controllers,
-  views and so on.
+  The entrypoint for defining your web interface, such
+  as controllers, views, channels and so on.
 
   This can be used in your application as:
 
@@ -13,27 +13,15 @@ defmodule CurrencyWatchWeb do
   on imports, uses and aliases.
 
   Do NOT define functions inside the quoted expressions
-  below.
+  below. Instead, define any helper function in modules
+  and import those modules here.
   """
-
-  def model do
-    quote do
-      use Ecto.Schema
-
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
-    end
-  end
 
   def controller do
     quote do
       use Phoenix.Controller, namespace: CurrencyWatchWeb
 
-      alias CurrencyWatch.Repo
-      import Ecto
-      import Ecto.Query
-
+      import Plug.Conn
       import CurrencyWatchWeb.Gettext
       alias CurrencyWatchWeb.Router.Helpers, as: Routes
     end
@@ -41,11 +29,12 @@ defmodule CurrencyWatchWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/currency_watch_web/templates",
-                        namespace: CurrencyWatchWeb
+      use Phoenix.View,
+        root: "lib/currency_watch_web/templates",
+        namespace: CurrencyWatchWeb
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -59,17 +48,15 @@ defmodule CurrencyWatchWeb do
   def router do
     quote do
       use Phoenix.Router
+      import Plug.Conn
+      import Phoenix.Controller
     end
   end
 
   def channel do
     quote do
       use Phoenix.Channel
-
-      alias CurrencyWatch.Repo
-      import Ecto
-      import Ecto.Query
-      import CurrencyWatch.Gettext
+      import CurrencyWatchWeb.Gettext
     end
   end
 

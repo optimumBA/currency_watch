@@ -3,6 +3,12 @@ defmodule CurrencyWatch.CurrencyControllerTest do
 
   alias CurrencyWatch.Currency
 
+  alias CurrencyWatch.Repo
+
+  import Ecto
+  import Ecto.Changeset
+  import Ecto.Query
+
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
@@ -30,7 +36,7 @@ defmodule CurrencyWatch.CurrencyControllerTest do
       "name" => "Euro",
       "current_rate" => "0.858022",
       "last_rate" => "0.858946",
-      "flag_url" => "http://localhost:4001/images/flags/eu.png",
+      "flag_url" => "http://localhost:4002/images/flags/eu.png",
     }]
   end
 end

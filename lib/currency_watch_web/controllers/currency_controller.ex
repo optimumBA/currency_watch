@@ -1,7 +1,7 @@
 defmodule CurrencyWatchWeb.CurrencyController do
   use CurrencyWatchWeb, :controller
 
-  alias CurrencyWatch.Currency
+  alias CurrencyWatch.{Currency, Repo}
 
   def index(conn, _params) do
     currencies = Currency

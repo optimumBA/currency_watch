@@ -1,5 +1,7 @@
 defmodule CurrencyWatch.ExchangeRate do
-  use CurrencyWatchWeb, :model
+  use Ecto.Schema
+  import Ecto.Changeset
+  import Ecto.Query, only: [from: 2]
 
   alias CurrencyWatch.ExchangeRate
 
