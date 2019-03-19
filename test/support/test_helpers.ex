@@ -3,7 +3,7 @@ defmodule CurrencyWatch.TestHelpers do
   alias CurrencyWatch.Currency
 
   def insert_currency(attrs \\ %{}) do
-    changes = Dict.merge(%{
+    changes = Map.merge(%{
       code: "#{random_currency_code()}",
       name: "Currency"
     }, attrs)

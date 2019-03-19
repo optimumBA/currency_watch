@@ -5,10 +5,6 @@ defmodule CurrencyWatch.CurrencyControllerTest do
 
   alias CurrencyWatch.Repo
 
-  import Ecto
-  import Ecto.Changeset
-  import Ecto.Query
-
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end

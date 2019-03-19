@@ -19,7 +19,7 @@ defmodule CurrencyWatch.Currency do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, ~w(code name flag))
+    |> cast(params, [:code, :name, :flag])
     |> validate_required([:code, :name])
     |> validate_length(:code, is: 3)
     |> validate_format(:code, ~r/^[A-Z]+$/)
