@@ -24,7 +24,7 @@ defmodule CurrencyWatchWeb.Endpoint do
   end
 
   plug Plug.RequestId
-  plug Plug.Logger
+  plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
@@ -40,7 +40,7 @@ defmodule CurrencyWatchWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_currency_watch_key",
-    signing_salt: "03ThnbgZ"
+    signing_salt: "Ta/38jud"
 
   plug CurrencyWatchWeb.Router
 end

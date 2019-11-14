@@ -13,7 +13,7 @@ config :currency_watch,
 # Configures the endpoint
 config :currency_watch, CurrencyWatchWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "/H1JhnBuuySo1ZtEgBamIu2FZwBgq4mn7bdszq9WhfRBwoi7bIEFSqoktpYpycgd",
+  secret_key_base: "bthsz+22Z2vte6C5pbMzusAgqlge/zoTKXiv+/GYE4JYwSFpJPFT6WdN7EkuS9Rf",
   render_errors: [view: CurrencyWatchWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: CurrencyWatch.PubSub, adapter: Phoenix.PubSub.PG2]
 
@@ -28,6 +28,3 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
-if File.exists? "config/#{Mix.env()}.secret.exs" do
-  import_config "#{Mix.env()}.secret.exs"
-end

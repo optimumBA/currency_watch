@@ -10,13 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :currency_watch, CurrencyWatchWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 4000],
-  https: [
-    :inet6,
-    port: 443,
-  ]
-  url: [host: "cw-s-eu-4692.herokuapp.com", port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -56,28 +50,6 @@ config :logger, level: :info
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
 
-# ## Using releases (distillery)
-#
-# If you are doing OTP releases, you need to instruct Phoenix
-# to start the server for all endpoints:
-#
-#     config :phoenix, :serve_endpoints, true
-#
-# Alternatively, you can configure exactly which server to
-# start per endpoint:
-#
-#     config :currency_watch, CurrencyWatchWeb.Endpoint, server: true
-#
-# Note you can't rely on `System.get_env/1` when using releases.
-# See the releases documentation accordingly.
-
-config :currency_watch, CurrencyWatch.Repo,
-  url: System.get_env("DATABASE_URL"),
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
-  ssl: true
-
-config :currency_watch, :currency_layer, access_key: System.get_env("CURRENCY_LAYER_KEY")
-
-# Finally import the config/prod.secret.exs which should be versioned
-# separately.
-# import_config "prod.secret.exs"
+# Finally import the config/prod.secret.exs which loads secrets
+# and configuration from environment variables.
+import_config "prod.secret.exs"
