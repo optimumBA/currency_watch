@@ -32,7 +32,7 @@ secret_key_base =
 
 config :currency_watch, CurrencyWatchWeb.Endpoint,
   http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
-  https: [:inet6, port: 443]
+  https: [:inet6, port: 443],
   url: [host: host, port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: secret_key_base
