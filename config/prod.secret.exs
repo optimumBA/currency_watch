@@ -12,16 +12,9 @@ database_url =
     """
 
 config :currency_watch, CurrencyWatch.Repo,
-  ssl: true,
+  # ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
-
-host =
-  System.get_env("HOST") ||
-    raise """
-    environment variable HOST is missing.
-    For example: cw-s-eu-4692.herokuapp.com
-    """
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
@@ -32,9 +25,6 @@ secret_key_base =
 
 config :currency_watch, CurrencyWatchWeb.Endpoint,
   http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
-  https: [:inet6, port: 443],
-  url: [scheme: :https, host: host, port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: secret_key_base
 
 # ## Using releases (Elixir v1.9+)
