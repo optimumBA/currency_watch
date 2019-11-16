@@ -1,5 +1,5 @@
 defmodule CurrencyWatch.ExchangeRateTest do
-  use CurrencyWatch.ModelCase
+  use CurrencyWatch.DataCase
 
   alias CurrencyWatch.ExchangeRate
 

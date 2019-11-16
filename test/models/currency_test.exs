@@ -1,5 +1,5 @@
 defmodule CurrencyWatch.CurrencyTest do
-  use CurrencyWatch.ModelCase, async: true
+  use CurrencyWatch.DataCase
 
   alias CurrencyWatch.Currency
 
@@ -18,41 +18,41 @@ defmodule CurrencyWatch.CurrencyTest do
 
   test "changeset does not allow numbers in currency code" do
     attrs = Map.put(@valid_attrs, :code, "3UR")
-    assert {:code, "has invalid format"} in errors_on(%Currency{}, attrs)
+    assert {:code, "has invalid format"} in old_errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow symbols in currency code" do
     attrs = Map.put(@valid_attrs, :code, "U$D")
-    assert {:code, "has invalid format"} in errors_on(%Currency{}, attrs)
+    assert {:code, "has invalid format"} in old_errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow short currency code" do
     attrs = Map.put(@valid_attrs, :code, "US")
-    assert {:code, "should be 3 character(s)"} in errors_on(%Currency{}, attrs)
+    assert {:code, "should be 3 character(s)"} in old_errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow long currency code" do
     attrs = Map.put(@valid_attrs, :code, "USSD")
-    assert {:code, "should be 3 character(s)"} in errors_on(%Currency{}, attrs)
+    assert {:code, "should be 3 character(s)"} in old_errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow numbers in currency flag" do
     attrs = Map.put(@valid_attrs, :flag, "3u")
-    assert {:flag, "has invalid format"} in errors_on(%Currency{}, attrs)
+    assert {:flag, "has invalid format"} in old_errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow symbols in currency flag" do
     attrs = Map.put(@valid_attrs, :flag, "u$")
-    assert {:flag, "has invalid format"} in errors_on(%Currency{}, attrs)
+    assert {:flag, "has invalid format"} in old_errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow short currency flag" do
     attrs = Map.put(@valid_attrs, :flag, "B")
-    assert {:flag, "should be 2 character(s)"} in errors_on(%Currency{}, attrs)
+    assert {:flag, "should be 2 character(s)"} in old_errors_on(%Currency{}, attrs)
   end
 
   test "changeset does not allow long currency flag" do
     attrs = Map.put(@valid_attrs, :flag, "bam")
-    assert {:flag, "should be 2 character(s)"} in errors_on(%Currency{}, attrs)
+    assert {:flag, "should be 2 character(s)"} in old_errors_on(%Currency{}, attrs)
   end
 end
