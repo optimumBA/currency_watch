@@ -25,8 +25,6 @@ jobs:
 
       - name: Install Dependencies
         run: mix deps.get
-        env:
-          MIX_ENV: test
 
       - name: Run Tests
         run: mix test
