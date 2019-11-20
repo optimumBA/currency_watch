@@ -1,0 +1,13 @@
+_build/
+.elixir_ls/
+.git/
+.github/
+assets/node_modules/
+cover/
+deps/
+priv/static/
+test/
+.DS_STORE
+.gitignore
+erl_crash.dump
+README.md
