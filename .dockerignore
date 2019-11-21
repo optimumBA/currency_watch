@@ -1,4 +1,5 @@
 _build/
+.aws/
 .elixir_ls/
 .git/
 .github/
