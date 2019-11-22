@@ -27,7 +27,8 @@ config :phoenix, :json_library, Jason
 
 config :currency_watch, CurrencyWatch.Scheduler,
   jobs: [
-    "@hourly": {CurrencyWatch.LiveExchangeRatesService, :fetch, []},
+    {"@reboot", {CurrencyWatch.LiveExchangeRatesService, :fetch, []}},
+    {"@hourly", {CurrencyWatch.LiveExchangeRatesService, :fetch, []}},
   ]
 
 # Import environment specific config. This must remain at the bottom

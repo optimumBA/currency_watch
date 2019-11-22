@@ -14,8 +14,16 @@ defmodule CurrencyWatch.Application do
       CurrencyWatchWeb.Endpoint,
       # Starts a worker by calling: CurrencyWatch.Worker.start_link(arg)
       # {CurrencyWatch.Worker, arg},
-      CurrencyWatch.Scheduler,
     ]
+
+    children = case Mix.env() do
+      :test ->
+        children
+      _ ->
+        children ++ [
+          CurrencyWatch.Scheduler,
+        ]
+    end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
