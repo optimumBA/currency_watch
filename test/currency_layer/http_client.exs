@@ -1,4 +1,4 @@
-defmodule CurrencyLayer.TestHttpClient do
+defmodule CurrencyLayer.Test.HTTPClient do
   @historical_json File.read!("test/fixtures/currency_layer/historical.json")
   @list_json File.read!("test/fixtures/currency_layer/list.json")
   @live_json File.read!("test/fixtures/currency_layer/live.json")
