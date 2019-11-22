@@ -26,6 +26,9 @@ RUN mix release
 
 FROM bitwalker/alpine-erlang:latest
 
+# Needed for health check
+RUN apk --update --no-cache add curl
+
 RUN mkdir /app
 WORKDIR /app
 
