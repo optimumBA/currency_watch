@@ -11,9 +11,10 @@ defmodule CurrencyWatch.Application do
       # Start the Ecto repository
       CurrencyWatch.Repo,
       # Start the endpoint when the application starts
-      CurrencyWatchWeb.Endpoint
+      CurrencyWatchWeb.Endpoint,
       # Starts a worker by calling: CurrencyWatch.Worker.start_link(arg)
       # {CurrencyWatch.Worker, arg},
+      CurrencyWatch.Scheduler,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
