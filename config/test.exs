@@ -17,4 +17,4 @@ config :currency_watch, CurrencyWatchWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-config :currency_watch, :currency_layer, access_key: "1234", http_client: CurrencyLayer.Test.HTTPClient
+config :currency_watch, :currency_layer, access_key: "1234", http_client: CurrencyLayer.TestHttpClient
