@@ -33,8 +33,7 @@ config :currency_watch, CurrencyWatchWeb.Endpoint,
   ],
   secret_key_base: secret_key_base,
   server: true,
-  url: [scheme: "https", host: host, port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]]
+  url: [scheme: "https", host: host, port: 443]
 
 currency_layer_key =
   System.get_env("CURRENCY_LAYER_KEY") ||
