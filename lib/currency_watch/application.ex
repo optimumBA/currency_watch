@@ -16,13 +16,9 @@ defmodule CurrencyWatch.Application do
       # {CurrencyWatch.Worker, arg},
     ]
 
-    children = case Mix.env() do
-      :test ->
-        children
-      _ ->
-        children ++ [
-          CurrencyWatch.Scheduler,
-        ]
+    children = case Application.get_env(:currency_watch, :env) do
+      :prod -> children ++ [CurrencyWatch.Scheduler]
+      _ -> children
     end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
