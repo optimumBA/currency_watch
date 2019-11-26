@@ -42,13 +42,17 @@ defmodule CurrencyWatchWeb.Endpoint do
     key: "_currency_watch_key",
     signing_salt: "Ta/38jud"
 
-  plug CORSPlug, origin: [
-    "capacitor://localhost",
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:8100",
-    "ionic://localhost",
-  ]
+  # TODO: enable CORS only for Ionic app
+  # plug CORSPlug, origin: [
+  #   "capacitor://localhost",
+  #   "http://localhost",
+  #   "http://localhost:8080",
+  #   "http://localhost:8100",
+  #   "ionic://localhost",
+  # ]
+
+  # Temp fix
+  plug CORSPlug
 
   plug CurrencyWatchWeb.Router
 end
