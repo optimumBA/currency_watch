@@ -45,6 +45,7 @@ defmodule CurrencyWatch.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:quantum, "~> 2.3"},
       {:timex, "~> 3.0"},
+      {:cors_plug, "~> 2.0"},
     ]
   end
 
