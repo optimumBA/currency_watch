@@ -1,0 +1,17 @@
+{
+  "env": {
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+      "required": true
+    },
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    }
+  },
+  "scripts": {
+    "postdeploy": "export HOST=$HEROKU_APP_NAME.herokuapp.com && bin/currency_watch eval 'CurrencyWatch.Release.seed'"
+  },
+  "stack": "container"
+}

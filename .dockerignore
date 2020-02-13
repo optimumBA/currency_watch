@@ -1,5 +1,4 @@
 _build/
-.aws/
 .elixir_ls/
 .git/
 .github/
@@ -10,5 +9,7 @@ priv/static/
 test/
 .DS_STORE
 .gitignore
+app.json
 erl_crash.dump
+heroku.yml
 README.md

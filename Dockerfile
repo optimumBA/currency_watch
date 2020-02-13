@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-elixir-phoenix:latest AS phx-builder
+FROM bitwalker/alpine-elixir-phoenix:latest AS builder
 
 # Set build env
 ENV MIX_ENV=prod
@@ -26,13 +26,10 @@ RUN mix release
 
 FROM bitwalker/alpine-erlang:latest
 
-# Needed for health check
-RUN apk --update --no-cache add curl
-
 RUN mkdir /app
 WORKDIR /app
 
-COPY --from=phx-builder /opt/app/_build/prod/rel/currency_watch ./
+COPY --from=builder /opt/app/_build/prod/rel/currency_watch ./
 RUN chown -R nobody: /app
 
 COPY docker-entrypoint.sh ./
