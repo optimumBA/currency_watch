@@ -8,7 +8,7 @@
     }
   },
   "scripts": {
-    "postdeploy": "export HOST=$HEROKU_APP_NAME.herokuapp.com && bin/currency_watch eval 'CurrencyWatch.Release.seed'"
+    "postdeploy": "export HOST=$HEROKU_APP_NAME.herokuapp.com && bin/currency_watch eval 'CurrencyWatch.Release.migrate' && bin/currency_watch eval 'CurrencyWatch.Release.seed'"
   },
   "stack": "container"
 }
