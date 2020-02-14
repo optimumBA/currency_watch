@@ -1,4 +1,8 @@
-import Config
+# In this file, we load production configuration and secrets
+# from environment variables. You can also hardcode secrets,
+# although such is generally not recommended and you have to
+# remember to add this file to your .gitignore.
+use Mix.Config
 
 database_url =
   System.get_env("DATABASE_URL") ||
@@ -8,7 +12,7 @@ database_url =
     """
 
 config :currency_watch, CurrencyWatch.Repo,
-  # ssl: true,
+  ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
@@ -19,6 +23,11 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
+if !System.get_env("HOST") && System.get_env("HEROKU_APP_NAME") do
+  app_name = System.get_env("HEROKU_APP_NAME")
+  System.put_env("HOST", "#{app_name}.herokuapp.com")
+end
+
 host =
   System.get_env("HOST") ||
     raise """
@@ -27,13 +36,10 @@ host =
     """
 
 config :currency_watch, CurrencyWatchWeb.Endpoint,
-  http: [
-    port: String.to_integer(System.get_env("PORT") || "4000"),
-    transport_options: [socket_opts: [:inet6]]
-  ],
-  secret_key_base: secret_key_base,
-  server: true,
-  url: [scheme: "https", host: host, port: 443]
+  http: [port: {:system, "PORT"}],
+  url: [scheme: "https", host: host, port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  secret_key_base: secret_key_base
 
 currency_layer_key =
   System.get_env("CURRENCY_LAYER_KEY") ||

@@ -25,14 +25,6 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :currency_watch, CurrencyWatch.Scheduler,
-  jobs: [
-    {"@reboot", {CurrencyWatch.LiveExchangeRatesService, :fetch, []}},
-    {"@hourly", {CurrencyWatch.LiveExchangeRatesService, :fetch, []}},
-  ]
-
-config :currency_watch, :env, Mix.env()
-
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
