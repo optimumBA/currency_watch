@@ -1,15 +1,31 @@
 {
   "addons": ["heroku-postgresql:hobby-dev"],
+  "buildpacks": [
+    {
+      "url": "https://github.com/HashNuke/heroku-buildpack-elixir"
+    },
+    {
+      "url": "https://github.com/gjaldon/heroku-buildpack-phoenix-static"
+    }
+  ],
   "env": {
     "HEROKU_APP_NAME": {
       "required": true
+    },
+    "POOL_SIZE": {
+      "value": "18"
     },
     "SECRET_KEY_BASE": {
       "generator": "secret"
     }
   },
-  "scripts": {
-    "postdeploy": "bin/currency_watch eval 'CurrencyWatch.Release.migrate' && bin/currency_watch eval 'CurrencyWatch.Release.seed'"
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
   },
-  "stack": "container"
+  "scripts": {
+    "postdeploy": "POOL_SIZE=2 mix ecto.setup"
+  }
 }

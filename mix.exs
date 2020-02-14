@@ -20,7 +20,7 @@ defmodule CurrencyWatch.MixProject do
   def application do
     [
       mod: {CurrencyWatch.Application, []},
-      extra_applications: [:hackney, :inets, :logger, :runtime_tools, :ssl, :timex]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
@@ -43,8 +43,6 @@ defmodule CurrencyWatch.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:quantum, "~> 2.3"},
-      {:timex, "~> 3.0"},
       {:cors_plug, "~> 2.0"},
     ]
   end
