@@ -32,7 +32,7 @@ defmodule CurrencyWatch.CurrencyControllerTest do
       "name" => "Euro",
       "current_rate" => "0.858022",
       "last_rate" => "0.858946",
-      "flag_url" => "http://localhost:4002/images/flags/eu.png",
+      "flag" => "eu",
     }]
   end
 end
